@@ -1,0 +1,85 @@
+user_types:
+  enterprise:
+    required_slots:
+      - name: client_name
+        question: "What is your name?"
+        type: string
+      - name: contact
+        question: "What's the best way to reach you — a phone number or email?"
+        type: string
+        input_type: contact_form
+        validation:
+          regex_email: '^[\w\.-]+@[\w\.-]+\.\w{2,}$'
+          regex_phone: '^[6-9]\d{9}$'
+          error_message: "Please enter a valid email address or 10-digit Indian mobile number."
+      - name: industry
+        question: "What industry is your business in?"
+        type: string
+      - name: project_type
+        question: "What type of project are you looking at? (solar, BES, hybrid)"
+        type: string
+      - name: budget_range
+        question: "What is your approximate budget range (in INR)?"
+        type: string
+      - name: timeline
+        question: "What is your expected timeline for this project?"
+        type: string
+      - name: company_size
+        question: "How many employees does your organisation have?"
+        type: string
+
+  smb:
+    required_slots:
+      - name: client_name
+        question: "What is your name?"
+        type: string
+      - name: contact
+        question: "What's the best way to reach you — a phone number or email?"
+        type: string
+        input_type: contact_form
+        validation:
+          regex_email: '^[\w\.-]+@[\w\.-]+\.\w{2,}$'
+          regex_phone: '^[6-9]\d{9}$'
+          error_message: "Please enter a valid email address or 10-digit Indian mobile number."
+      - name: industry
+        question: "What type of business do you run?"
+        type: string
+      - name: project_type
+        question: "Are you looking at solar, battery storage, or both?"
+        type: string
+      - name: monthly_bill
+        question: "What is your average monthly electricity bill (in INR)?"
+        type: number
+      - name: timeline
+        question: "When are you looking to get this installed?"
+        type: string
+
+  individual:
+    required_slots:
+      - name: client_name
+        question: "What is your name?"
+        type: string
+      - name: contact
+        question: "What's the best way to reach you — a phone number or email?"
+        type: string
+        input_type: contact_form
+        validation:
+          regex_email: '^[\w\.-]+@[\w\.-]+\.\w{2,}$'
+          regex_phone: '^[6-9]\d{9}$'
+          error_message: "Please enter a valid email address or 10-digit Indian mobile number."
+      - name: state
+        question: "Which state are you located in?"
+        type: string
+      - name: house_size_sqft
+        question: "What is the approximate size of your home in square feet?"
+        type: number
+      - name: monthly_bill_inr
+        question: "What was your last electricity bill amount in INR?"
+        type: number
+      - name: project_type
+        question: "Are you interested in solar panels, home battery storage, or both?"
+        type: string
+    optional_slots:
+      - name: monthly_kwh
+        question: "If you know it, what was your monthly consumption in kWh?"
+        type: number

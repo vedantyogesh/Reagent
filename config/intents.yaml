@@ -1,0 +1,19 @@
+intents:
+  - name: general_faq
+    description: "User is asking about the company, products, team, or general information"
+    triggers_flow: faq
+
+  - name: pricing_inquiry
+    description: "User is asking about cost, pricing, or budget"
+    triggers_flow: proposal
+
+  - name: proposal_request
+    description: "User explicitly wants a proposal, quote, or recommendation"
+    triggers_flow: proposal
+
+  - name: escalation_request
+    description: "User wants to speak to a human or sales representative"
+    triggers_flow: escalate
+
+fallback_intent: general_faq
+confidence_threshold: 0.70

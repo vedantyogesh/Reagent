@@ -1,0 +1,92 @@
+# LLM never computes prices. Rules evaluated top-to-bottom. First match wins.
+
+rules:
+  # Individual — Solar
+  - id: individual_solar_small
+    conditions:
+      user_type: individual
+      project_type: solar
+      house_size_sqft_max: 1000
+    output:
+      price_min: 150000
+      price_max: 250000
+      unit: INR
+      assumptions: "Estimate for homes under 1000 sqft, 2–3 kW rooftop solar system"
+
+  - id: individual_solar_medium
+    conditions:
+      user_type: individual
+      project_type: solar
+      house_size_sqft_max: 2000
+    output:
+      price_min: 250000
+      price_max: 400000
+      unit: INR
+      assumptions: "Estimate for homes 1000–2000 sqft, 3–5 kW rooftop solar system"
+
+  - id: individual_solar_large
+    conditions:
+      user_type: individual
+      project_type: solar
+    output:
+      price_min: 400000
+      price_max: 700000
+      unit: INR
+      assumptions: "Estimate for homes above 2000 sqft, 5–8 kW rooftop solar system"
+
+  # Individual — Battery Energy Storage
+  - id: individual_bes
+    conditions:
+      user_type: individual
+      project_type: bes
+    output:
+      price_min: 100000
+      price_max: 200000
+      unit: INR
+      assumptions: "Estimate for home battery storage, 5–10 kWh capacity"
+
+  # Individual — Hybrid (solar + BES)
+  - id: individual_hybrid
+    conditions:
+      user_type: individual
+      project_type: hybrid
+    output:
+      price_min: 350000
+      price_max: 700000
+      unit: INR
+      assumptions: "Estimate for hybrid solar + battery system for a typical home"
+
+  # SMB — Solar
+  - id: smb_solar
+    conditions:
+      user_type: smb
+      project_type: solar
+    output:
+      price_min: 500000
+      price_max: 2000000
+      unit: INR
+      assumptions: "Estimate for small-medium business rooftop solar, 10–50 kW system"
+
+  # SMB — BES
+  - id: smb_bes
+    conditions:
+      user_type: smb
+      project_type: bes
+    output:
+      price_min: 300000
+      price_max: 1000000
+      unit: INR
+      assumptions: "Estimate for commercial battery storage, 20–50 kWh capacity"
+
+  # SMB — Hybrid
+  - id: smb_hybrid
+    conditions:
+      user_type: smb
+      project_type: hybrid
+    output:
+      price_min: 800000
+      price_max: 3000000
+      unit: INR
+      assumptions: "Estimate for commercial hybrid solar + BES system"
+
+disclaimer: "All prices are indicative estimates and subject to site survey and final technical assessment by Ions Energy."

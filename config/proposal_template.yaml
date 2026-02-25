@@ -1,0 +1,28 @@
+sections:
+  - id: executive_summary
+    title: "Executive Summary"
+    prompt_instruction: "Write a 2-3 sentence summary of the client's situation and what Ions Energy is proposing. Mention the client's name, their user type (home/business/enterprise), and the project type. Keep it concise and professional."
+
+  - id: solution_overview
+    title: "Proposed Solution"
+    prompt_instruction: "Describe the recommended solution based on project_type and collected slot data. Explain what will be installed, how it works, and why it suits this client's specific situation. Use technical but accessible language."
+
+  - id: why_ions_energy
+    title: "Why Ions Energy"
+    prompt_instruction: "Explain why Ions Energy is the right partner using only retrieved knowledge base chunks. Highlight relevant credentials, experience, or differentiators. Do not invent facts not present in the context."
+
+  - id: technical_specs
+    title: "Technical Specifications"
+    prompt_instruction: "Outline key technical details of the proposed solution based on project_type. Include estimated system size, key components, and performance expectations. Base all figures on the retrieved context and collected slots."
+
+  - id: pricing
+    title: "Investment Overview"
+    prompt_instruction: "Present the pricing range with assumptions and disclaimer. Use the deterministic price values provided exactly — do not modify the numbers. Write a brief human-readable explanation around the price range. Include the disclaimer verbatim at the end of this section."
+
+  - id: timeline
+    title: "Project Timeline"
+    prompt_instruction: "Provide a high-level timeline based on the client's stated timeline and project complexity. Break it into phases: survey, design, procurement, installation, commissioning. Be realistic and specific."
+
+  - id: next_steps
+    title: "Next Steps"
+    prompt_instruction: "List exactly 3 clear next steps for the client to proceed. Each step should be actionable. Include contacting Ions Energy as one of the steps. Format as a numbered list."

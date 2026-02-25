@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal — {{ company.company_name }}</title>
+  <style>
+    /* ── Reset ──────────────────────────────────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Page setup (WeasyPrint) ────────────────────────────────────────── */
+    @page {
+      size: A4;
+      margin: 2.5cm 2cm 3cm 2cm;
+
+      @top-center {
+        content: "{{ company.company_name }} — Energy Proposal";
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 9pt;
+        color: #888;
+      }
+
+      @bottom-center {
+        content: "Page " counter(page) " of " counter(pages) "  ·  {{ company.contact_email }}";
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 8pt;
+        color: #aaa;
+      }
+    }
+
+    /* ── Typography ─────────────────────────────────────────────────────── */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.65;
+      color: #1a1a2e;
+    }
+
+    h1 { font-size: 22pt; font-weight: 700; color: #0f3460; margin-bottom: 4px; }
+    h2 { font-size: 13pt; font-weight: 700; color: #0f3460; margin-bottom: 8px; }
+    h3 { font-size: 11pt; font-weight: 600; color: #16213e; margin-bottom: 6px; }
+    p  { margin-bottom: 10px; }
+
+    /* ── Cover block ────────────────────────────────────────────────────── */
+    .cover {
+      padding: 40px 0 30px;
+      border-bottom: 3px solid #0f3460;
+      margin-bottom: 32px;
+    }
+    .cover .company-name {
+      font-size: 14pt;
+      font-weight: 600;
+      color: #e94560;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+    .cover .proposal-title {
+      font-size: 26pt;
+      font-weight: 700;
+      color: #0f3460;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .cover .meta {
+      font-size: 9.5pt;
+      color: #555;
+    }
+    .cover .meta span { margin-right: 24px; }
+
+    /* ── Section ────────────────────────────────────────────────────────── */
+    .section {
+      margin-bottom: 28px;
+      page-break-inside: avoid;
+    }
+    .section-header {
+      background: #f0f4ff;
+      border-left: 4px solid #0f3460;
+      padding: 8px 14px;
+      margin-bottom: 12px;
+      page-break-after: avoid;
+    }
+    .section-header h2 {
+      margin: 0;
+    }
+    .section-content {
+      padding: 0 4px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* ── Disclaimer ─────────────────────────────────────────────────────── */
+    .disclaimer {
+      font-size: 8.5pt;
+      color: #777;
+      border-top: 1px solid #ddd;
+      padding-top: 8px;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* ── Tables ─────────────────────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+      font-size: 9.5pt;
+    }
+    th {
+      background: #0f3460;
+      color: white;
+      padding: 7px 10px;
+      text-align: left;
+    }
+    td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    tr:nth-child(even) td { background: #f8f9ff; }
+
+    /* ── Footer gap ─────────────────────────────────────────────────────── */
+    .footer-spacer { height: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- Cover block -->
+  <div class="cover">
+    <div class="company-name">{{ company.company_name }}</div>
+    <div class="proposal-title">Energy Solution Proposal<br>for {{ proposal.client_name }}</div>
+    <div class="meta">
+      <span>Prepared by {{ company.company_name }}</span>
+      <span>Date: {{ generated_at[:10] }}</span>
+      <span>Contact: {{ company.contact_email }}</span>
+    </div>
+  </div>
+
+  <!-- Proposal sections -->
+  {% for section in proposal.sections %}
+  <div class="section">
+    <div class="section-header">
+      <h2>{{ loop.index }}. {{ section.title }}</h2>
+    </div>
+    <div class="section-content">{{ section.content }}</div>
+  </div>
+  {% endfor %}
+
+  <div class="footer-spacer"></div>
+
+</body>
+</html>

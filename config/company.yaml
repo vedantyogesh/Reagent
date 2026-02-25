@@ -1,0 +1,14 @@
+company_name: "Ions Energy"
+industry: "energy"
+country: "India"
+currency: "INR"
+contact_email: "contact@ionsenergy.com"
+escalation_message: "This requires a specialist. Would you like to connect with our team at contact@ionsenergy.com?"
+
+models:
+  classification: "gpt-4o-mini"
+  extraction: "gpt-4o-mini"
+  faq_generation: "gpt-4o-mini"
+  proposal_generation: "gpt-4o"
+
+session_timeout_minutes: 30

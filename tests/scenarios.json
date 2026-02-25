@@ -1,0 +1,264 @@
+[
+  {
+    "id": 1,
+    "description": "FAQ — enterprise user asks about BES vs diesel",
+    "user_type_hint": "enterprise",
+    "turns": [
+      { "user": "We run a manufacturing plant and are exploring battery energy storage options" },
+      { "user": "What's the difference between your BES systems and a diesel generator?" }
+    ],
+    "expected": {
+      "flow_state_final": "intent_detection",
+      "retrieval_triggered": true,
+      "citations_include": ["BES vs Diesel Generator (DG)"],
+      "escalated": false,
+      "hallucination_check": "response must not mention prices not in context"
+    }
+  },
+  {
+    "id": 2,
+    "description": "FAQ — SMB user asks about solar for their business",
+    "user_type_hint": "smb",
+    "turns": [
+      { "user": "I own a small restaurant and want to know about solar panels" },
+      { "user": "What system size do I need for a commercial setup?" }
+    ],
+    "expected": {
+      "flow_state_final": "intent_detection",
+      "retrieval_triggered": true,
+      "citations_include": ["Solar Solutions"],
+      "escalated": false
+    }
+  },
+  {
+    "id": 3,
+    "description": "FAQ — individual homeowner asks about hybrid systems",
+    "user_type_hint": "individual",
+    "turns": [
+      { "user": "I'm a homeowner looking at solar plus battery backup" },
+      { "user": "What are the benefits of a hybrid system over grid-only solar?" }
+    ],
+    "expected": {
+      "flow_state_final": "intent_detection",
+      "retrieval_triggered": true,
+      "citations_include": ["Hybrid Systems"],
+      "escalated": false
+    }
+  },
+  {
+    "id": 4,
+    "description": "Ambiguous user type — generic opener triggers clarification",
+    "user_type_hint": null,
+    "turns": [
+      { "user": "Hi" }
+    ],
+    "expected": {
+      "flow_state_final": "user_type_detection",
+      "clarification_asked": true,
+      "escalated": false
+    }
+  },
+  {
+    "id": 5,
+    "description": "Ambiguous user type — vague message triggers clarification then resolves",
+    "user_type_hint": null,
+    "turns": [
+      { "user": "I need some energy info" },
+      { "user": "It's for my home" }
+    ],
+    "expected": {
+      "flow_state_final": "intent_detection",
+      "user_type_resolved": "individual",
+      "escalated": false
+    }
+  },
+  {
+    "id": 6,
+    "description": "Full proposal flow — individual homeowner solar",
+    "user_type_hint": "individual",
+    "turns": [
+      { "user": "I want a solar proposal for my home" },
+      { "user": "Priya Sharma" },
+      { "user": "contact_form", "email": "priya@example.com", "phone": "" },
+      { "user": "Maharashtra" },
+      { "user": "1500" },
+      { "user": "3500" },
+      { "user": "solar" }
+    ],
+    "expected": {
+      "flow_state_final": "complete",
+      "all_slots_filled": true,
+      "proposal_generated": true,
+      "pdf_exists": true,
+      "lead_written": true,
+      "escalated": false
+    }
+  },
+  {
+    "id": 7,
+    "description": "Full proposal flow — SMB solar",
+    "user_type_hint": "smb",
+    "turns": [
+      { "user": "I need a solar quote for my small business" },
+      { "user": "Rahul Verma" },
+      { "user": "contact_form", "email": "", "phone": "9876543210" },
+      { "user": "Textile manufacturing" },
+      { "user": "solar" },
+      { "user": "45000" },
+      { "user": "Within 6 months" }
+    ],
+    "expected": {
+      "flow_state_final": "complete",
+      "all_slots_filled": true,
+      "proposal_generated": true,
+      "pdf_exists": true,
+      "lead_written": true,
+      "escalated": false
+    }
+  },
+  {
+    "id": 8,
+    "description": "Full proposal flow — enterprise hybrid",
+    "user_type_hint": "enterprise",
+    "turns": [
+      { "user": "We need a hybrid solar and battery proposal for our enterprise campus" },
+      { "user": "Vikram Singh" },
+      { "user": "contact_form", "email": "vikram@corp.com", "phone": "9123456789" },
+      { "user": "IT services" },
+      { "user": "hybrid" },
+      { "user": "2 crore" },
+      { "user": "Q3 this year" },
+      { "user": "500 employees" }
+    ],
+    "expected": {
+      "flow_state_final": "complete",
+      "all_slots_filled": true,
+      "proposal_generated": true,
+      "pdf_exists": true,
+      "lead_written": true,
+      "escalated": false
+    }
+  },
+  {
+    "id": 9,
+    "description": "Partial slot info across multiple turns — additive extraction",
+    "user_type_hint": "individual",
+    "turns": [
+      { "user": "I want a solar proposal. My name is Ananya" },
+      { "user": "contact_form", "email": "ananya@mail.com", "phone": "" },
+      { "user": "I'm in Karnataka and my house is about 1200 sqft" },
+      { "user": "My bill is around 2800 rupees" },
+      { "user": "solar" }
+    ],
+    "expected": {
+      "flow_state_final": "complete",
+      "slots_collected": ["client_name", "email", "state", "house_size_sqft", "monthly_bill_inr", "project_type"],
+      "proposal_generated": true,
+      "escalated": false
+    }
+  },
+  {
+    "id": 10,
+    "description": "Multi-turn slot collection — info split across turns",
+    "user_type_hint": "smb",
+    "turns": [
+      { "user": "I'd like a proposal for my bakery" },
+      { "user": "Meena" },
+      { "user": "contact_form", "email": "meena@bakery.in", "phone": "" },
+      { "user": "Bakery and food production" },
+      { "user": "battery" },
+      { "user": "My monthly bill is 12000 rupees" },
+      { "user": "I want it done by December" }
+    ],
+    "expected": {
+      "flow_state_final": "complete",
+      "slots_collected": ["client_name", "email", "industry", "project_type", "monthly_bill", "timeline"],
+      "proposal_generated": true,
+      "escalated": false
+    }
+  },
+  {
+    "id": 11,
+    "description": "User corrects a previously given slot value",
+    "user_type_hint": "individual",
+    "turns": [
+      { "user": "Solar proposal please, I'm Ravi" },
+      { "user": "contact_form", "email": "ravi@test.com", "phone": "" },
+      { "user": "Tamil Nadu" },
+      { "user": "Actually my name is Ravi Kumar, not just Ravi" },
+      { "user": "800" },
+      { "user": "2200" },
+      { "user": "solar" }
+    ],
+    "expected": {
+      "flow_state_final": "complete",
+      "slot_update_handled": true,
+      "collected_slots_includes": { "client_name": "Ravi Kumar" },
+      "escalated": false
+    }
+  },
+  {
+    "id": 12,
+    "description": "Slot fails extraction twice — escalation triggered",
+    "user_type_hint": "individual",
+    "turns": [
+      { "user": "I want a solar proposal" },
+      { "user": "???" },
+      { "user": "????" }
+    ],
+    "expected": {
+      "flow_state_final": "escalated",
+      "escalated": true,
+      "escalation_reason": "slot_attempt_max"
+    }
+  },
+  {
+    "id": 13,
+    "description": "User explicitly requests human handoff",
+    "user_type_hint": null,
+    "turns": [
+      { "user": "I want to speak to a real person from your sales team" }
+    ],
+    "expected": {
+      "flow_state_final": "escalated",
+      "escalated": true,
+      "escalation_reason": "escalation_intent"
+    }
+  },
+  {
+    "id": 14,
+    "description": "Pricing inquiry — known rule match for individual solar small",
+    "user_type_hint": "individual",
+    "turns": [
+      { "user": "How much does solar cost for a small home?" },
+      { "user": "It's for my home, I want a proposal" },
+      { "user": "Sunita" },
+      { "user": "contact_form", "email": "sunita@home.com", "phone": "" },
+      { "user": "Rajasthan" },
+      { "user": "900" },
+      { "user": "1500" },
+      { "user": "solar" }
+    ],
+    "expected": {
+      "flow_state_final": "complete",
+      "pricing_rule_matched": "individual_solar_small",
+      "price_min": 150000,
+      "price_max": 250000,
+      "escalated": false
+    }
+  },
+  {
+    "id": 15,
+    "description": "Out-of-scope question — no hallucination, escalate flag in FAQ output",
+    "user_type_hint": "individual",
+    "turns": [
+      { "user": "What is the stock price of Ions Energy on NSE?" }
+    ],
+    "expected": {
+      "flow_state_final": "intent_detection",
+      "response_contains": "don't have that information",
+      "hallucination_check": "response must not invent stock prices",
+      "escalated": false
+    }
+  }
+]

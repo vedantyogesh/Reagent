@@ -1,0 +1,11 @@
+/*
+ * Ions Energy Chat Widget — standalone CSS
+ * All critical styles are injected by widget.js for zero-dependency embedding.
+ * This file is for reference / overrides only.
+ * Import this AFTER widget.js if you need to customise widget appearance.
+ */
+
+/* Example overrides:
+#ie-chat-btn { bottom: 40px; right: 40px; }
+#ie-chat-window { width: 420px; height: 620px; }
+*/
