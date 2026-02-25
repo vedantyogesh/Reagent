@@ -1,6 +1,6 @@
-# Ions Energy — Config-Driven AI Chatbot & Proposal Generator
+# Config-Driven AI Chatbot & Proposal Generator
 
-A config-driven AI chatbot and PDF proposal generator for Ions Energy. Reusable across companies by swapping `/config/` and `/knowledge_base/` — zero application code changes required.
+A config-driven AI chatbot and PDF proposal generator. Reusable across companies by swapping `/config/` and `/knowledge_base/` — zero application code changes required.
 
 ## Quick Start
 
